@@ -14,8 +14,9 @@ function run() {
   // 2) upload files
   const s3URI = `s3://${bucket}`
   exec.exec(`aws s3 sync ${distFolder} ${s3URI} --region ${bucketRegion}`)
+  const websiteURL = `http://${bucket}.s3-website-${bucketRegion}.amazonaws.com`
 
-  core.notice('Hello from my custom javascript action.')
+  core.setOutput('website-url', websiteURL)
 }
 
 run()
